@@ -32,7 +32,7 @@
         .sidebar.active { transform: translateX(390px); }
         .sidebar-inner { display: flex; flex-direction: column; height: 100%; padding: 60px 50px; }
         
-        .logo-area { display: flex; align-items: center; gap: 15px; margin-bottom: 80px; margin-top: 40px;}
+        .logo-area { display: flex; align-items: center; gap: 15px; margin-bottom: 60px; margin-top: 40px;}
         .logo-symbol { font-size: 1.8rem; background: var(--white); width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .logo-text h2 { margin: 0; font-size: 1.5rem; letter-spacing: 4px; }
 
@@ -49,101 +49,6 @@
         h1 { font-family: 'Playfair Display'; font-size: 4rem; }
         .accent { color: var(--accent-pink); font-style: italic; }
 
-        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 100px 10%; background: rgba(255, 255, 255, 0.4); }
-        .art-card { background: var(--white); padding: 20px; border-radius: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; }
-        .art-card:hover { transform: translateY(-10px); }
-        
-        .image-container { position: relative; width: 100%; height: 400px; margin-bottom: 20px; overflow: hidden; border-radius: 15px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; }
-        .image-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        
-        .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; width: 100%; transition: 0.3s; }
-        .cta-primary:hover { background: var(--accent-pink); }
-    </style>
-</head>
-<body>
-
-    <div class="bg-animation"></div>
-    <button class="menu-toggle" onclick="toggleSidebar()"><div class="line"></div><div class="line"></div></button>
-
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-inner">
-            <div class="logo-area">
-                <div class="logo-symbol"><ion-icon name="brush-outline" style="color:var(--accent-pink)"></ion-icon></div>
-                <div class="logo-text"><h2>EMAN'S</h2></div>
-            </div>
-            <ul class="nav-menu">
-                <li><a onclick="toggleSidebar()">HOME</a></li>
-                <li><a onclick="scrollToGallery(); toggleSidebar()">COLLECTION</a></li>
-                <li><a onclick="directCheckout(); toggleSidebar()">INQUIRY [<span id="cart-count">0</span>]</a></li>
-            </ul>
-            <div class="sidebar-bottom">
-                <a href="https://instagram.com/architectpainter" target="_blank" class="social-link">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                    <span style="font-size:0.7rem; letter-spacing:3px;">@ARCHITECTPAINTER</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-glass">
-            <h1>EMAN'S <span class="accent">CANAVA FLOWERS</span></h1>
-            <button class="cta-primary" style="width:auto; margin-top:30px;" onclick="scrollToGallery()">EXPLORE</button>
-        </div>
-    </header>
-
-    <main id="gallery" class="art-grid"></main>
-
-    <script>
-        const WHATSAPP = "201095195417";
-        let cart = [];
-
-        // THE COMPLETE LIST OF 10 PAINTINGS
-        const paintings = [
-            { id: 1, title: "PAINTING 01", size: "100X70 CM", photos: ["p1.jpg"] },
-            { id: 2, title: "PAINTING 02", size: "60X60 CM", photos: ["p2.jpg"] },
-            { id: 3, title: "PAINTING 03", size: "30X30 CM", photos: ["p3.jpg"] },
-            { id: 4, title: "PAINTING 04", size: "30X30 CM", photos: ["p4.jpg"] },
-            { id: 5, title: "PAINTING 05", size: "30X30 CM", photos: ["p5.jpg"] },
-            { id: 6, title: "PAINTING 06", size: "30X30 CM", photos: ["p6.jpg"] },
-            { id: 7, title: "PAINTING 07", size: "30X30 CM", photos: ["p7.jpg"] },
-            { id: 8, title: "PAINTING 08", size: "30X30 CM", photos: ["p8.jpg"] },
-            { id: 9, title: "PAINTING 09", size: "30X30 CM", photos: ["p9.jpg"] },
-            { id: 10, title: "PAINTING 10", size: "30X30 CM", photos: ["p10.jpg"] }
-        ];
-
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function scrollToGallery() { document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' }); }
-        
-        const grid = document.getElementById('gallery');
-        paintings.forEach(p => {
-            grid.innerHTML += `
-                <div class="art-card">
-                    <div class="image-container"><img src="${p.photos[0]}"></div>
-                    <h3>${p.title}</h3>
-                    <p style="font-size: 0.7rem; color: #888; margin: 5px 0 15px; letter-spacing: 2px;">${p.size}</p>
-                    <button class="cta-primary" id="btn-${p.id}" onclick="addToCart(${p.id}, '${p.title}')">SELECT PIECE</button>
-                </div>`;
-        });
-
-        function addToCart(id, title) {
-            const btn = document.getElementById(`btn-${id}`);
-            if (!cart.includes(title)) { 
-                cart.push(title); 
-                btn.innerText = "✓ SELECTED"; 
-                btn.style.background = "#f43f5e"; 
-            } else { 
-                cart = cart.filter(t => t !== title); 
-                btn.innerText = "SELECT PIECE"; 
-                btn.style.background = "#1a1a1a"; 
-            }
-            document.getElementById('cart-count').innerText = cart.length;
-        }
-
-        function directCheckout() {
-            if (cart.length === 0) { alert("Please select a painting first."); return; }
-            window.open(`https://wa.me/${WHATSAPP}?text=Inquiry:\n${cart.join("\n")}`, '_blank');
-        }
-    </script>
-</body>
-</html>
+        /* ABOUT SECTION STYLE */
+        .about-section { padding: 80px 10%; display: flex; justify-content: center; }
+        .about-glass { background: rgba(255,255,255,0.3); padding: 60px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.5);
