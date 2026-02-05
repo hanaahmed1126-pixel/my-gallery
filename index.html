@@ -18,7 +18,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Outfit', sans-serif; color: var(--text-dark); overflow-x: hidden; text-transform: uppercase; }
 
-        /* ANIMATED BACKGROUND */
         .bg-animation {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
             background: linear-gradient(45deg, var(--white), var(--rose-light), var(--rose-mid), var(--white));
@@ -26,7 +25,6 @@
         }
         @keyframes roseFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* SIDEBAR (CLEAN - NO SIGN IN) */
         .menu-toggle { position: fixed; top: 30px; left: 30px; background: var(--white); border: 1px solid rgba(0,0,0,0.05); padding: 15px; cursor: pointer; z-index: 2100; border-radius: 4px; }
         .line { width: 22px; height: 1.5px; background: var(--text-dark); margin: 6px 0; }
 
@@ -44,28 +42,34 @@
         .nav-menu a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; letter-spacing: 5px; opacity: 0.6; transition: 0.4s; cursor: pointer; }
         .nav-menu a:hover { opacity: 1; color: var(--accent-pink); padding-left: 12px; }
 
-        .sidebar-bottom { margin-top: auto; }
-        .social-icons { display: flex; gap: 25px; margin-top: 35px; font-size: 1.4rem; }
-        .social-icons a { color: var(--text-dark); opacity: 0.4; }
-
-        /* HERO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; }
         .hero-glass { background: var(--glass); padding: 70px 90px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(15px); text-align: center; }
         h1 { font-family: 'Playfair Display'; font-size: 4rem; }
         .accent { color: var(--accent-pink); font-style: italic; }
 
-        /* GALLERY & MULTI-ANGLE */
         .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 100px 10%; background: rgba(255, 255, 255, 0.4); }
-        .art-card { background: var(--white); padding: 20px; border-radius: 25px; transition: 0.5s; border: 1px solid transparent; text-align: center; }
+        .art-card { background: var(--white); padding: 20px; border-radius: 25px; transition: 0.5s; text-align: center; }
         
-        .image-container { position: relative; width: 100%; height: 400px; margin-bottom: 20px; cursor: pointer; overflow: hidden; border-radius: 15px; }
-        .image-container img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; }
+        .image-container { 
+            position: relative; width: 100%; height: 400px; 
+            margin-bottom: 20px; cursor: pointer; overflow: hidden; 
+            border-radius: 15px; background: #f9f9f9;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .image-container img { 
+            max-width: 100%; max-height: 100%; 
+            object-fit: contain; 
+            position: absolute; opacity: 0; transition: opacity 0.5s ease; 
+        }
         .image-container img.active { opacity: 1; }
         
         .angle-hint { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.6rem; pointer-events: none; }
 
-        .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; margin-top: 15px; width: 100%; transition: 0.3s; }
+        .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; margin-top: 10px; width: 100%; transition: 0.3s; }
         .cta-primary:hover { background: var(--accent-pink); }
+        
+        .size-info { font-size: 0.7rem; color: #888; margin-top: 5px; letter-spacing: 2px; }
+        .price-info { font-size: 1.1rem; font-weight: 600; color: var(--accent-pink); margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -85,12 +89,6 @@
                 <li><a onclick="scrollToGallery(); toggleSidebar()">PAINTINGS</a></li>
                 <li><a onclick="directCheckout(); toggleSidebar()">FINISH ORDERS [<span id="cart-count">0</span>]</a></li>
             </ul>
-            <div class="sidebar-bottom">
-                <div class="social-icons">
-                    <a href="https://instagram.com/architectpainter" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a href="https://facebook.com/architectpainter" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
-                </div>
-            </div>
         </div>
     </nav>
 
@@ -108,26 +106,40 @@
         const WHATSAPP = "201095195417";
         let cart = [];
 
-        // UPDATE PHOTO LINKS HERE
+        // --- EDIT YOUR PAINTINGS BELOW THIS LINE ---
         const paintings = [
-            { id: 1, title: "CANAVA STUDY 01", photos: ["p1_front.jpg", "p1_side.jpg", "p1_room.jpg"] },
-            { id: 2, title: "CANAVA STUDY 02", photos: ["p2_front.jpg", "p2_side.jpg", "p2_room.jpg"] }
+            { 
+                id: 1, 
+                title: "PAINTING ONE NAME", 
+                size: "60x60 CM", 
+                price: "EGP 000",
+                photos: ["1_scanned.jpg", "1_texture.jpg", "1_studio.jpg"] 
+            },
+            { 
+                id: 2, 
+                title: "PAINTING TWO NAME", 
+                size: "30x40 CM", 
+                price: "EGP 000",
+                photos: ["2_scanned.jpg", "2_texture.jpg", "2_studio.jpg"] 
+            }
         ];
+        // --- EDIT YOUR PAINTINGS ABOVE THIS LINE ---
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function scrollToGallery() { document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' }); }
 
-        // GALLERY GENERATOR
         const grid = document.getElementById('gallery');
         paintings.forEach(p => {
-            let photoHtml = p.photos.map((src, index) => `<img src="${src}" class="${index === 0 ? 'active' : ''}" data-index="${index}">`).join('');
+            let photoHtml = p.photos.map((src, index) => `<img src="${src}" class="${index === 0 ? 'active' : ''}">`).join('');
             grid.innerHTML += `
                 <div class="art-card">
                     <div class="image-container" onclick="nextAngle(this)">
                         ${photoHtml}
-                        <div class="angle-hint">CLICK TO FLIP ANGLE</div>
+                        <div class="angle-hint">FLIP VIEW</div>
                     </div>
                     <h3>${p.title}</h3>
+                    <p class="size-info">${p.size}</p>
+                    <p class="price-info">${p.price}</p>
                     <button class="cta-primary" id="btn-${p.id}" onclick="addToCart(${p.id}, '${p.title}')">SELECT FOR ORDER</button>
                 </div>`;
         });
@@ -146,23 +158,18 @@
                 const btn = document.getElementById(`btn-${id}`);
                 btn.innerText = "✓ SELECTED";
                 btn.style.background = "#f43f5e";
-                document.getElementById('cart-count').innerText = cart.length;
             } else {
-                // If they click again, remove it
                 cart = cart.filter(item => item !== title);
                 const btn = document.getElementById(`btn-${id}`);
                 btn.innerText = "SELECT FOR ORDER";
                 btn.style.background = "#1a1a1a";
-                document.getElementById('cart-count').innerText = cart.length;
             }
+            document.getElementById('cart-count').innerText = cart.length;
         }
 
         function directCheckout() {
-            if (cart.length === 0) {
-                alert("PLEASE SELECT AT LEAST ONE PAINTING FIRST.");
-                return;
-            }
-            const message = encodeURIComponent(`HELLO EMAN, I WOULD LIKE TO ORDER THE FOLLOWING PIECES FROM EMANS CANAVA FLOWERS:\n\n${cart.join("\n")}`);
+            if (cart.length === 0) { alert("PLEASE SELECT AT LEAST ONE PAINTING FIRST."); return; }
+            const message = encodeURIComponent(`HELLO EMAN, I WOULD LIKE TO ORDER THE FOLLOWING PIECES:\n\n${cart.join("\n")}`);
             window.open(`https://wa.me/${WHATSAPP}?text=${message}`, '_blank');
         }
     </script>
