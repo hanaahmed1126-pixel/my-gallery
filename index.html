@@ -95,6 +95,17 @@
             <h1>EMAN'S <span class="accent">CANAVA FLOWERS</span></h1>
             <p>@ARCHITECTPAINTER | BOTANICAL ART</p>
             <button class="cta-primary" style="width:auto;" onclick="scrollToGallery()">VIEW PIECES</button>
+     <ul class="nav-menu">
+    <li><a onclick="toggleSidebar()">HOME</a></li>
+    <li><a onclick="scrollToGallery(); toggleSidebar()">PAINTINGS</a></li>
+    <li><a onclick="directCheckout(); toggleSidebar()">FINISH INQUIRY [<span id="cart-count">0</span>]</a></li>
+         <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+    <a href="https://www.instagram.com/architectpainter" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:10px; color:var(--text-dark); font-size:0.8rem; opacity:0.6;">
+        <ion-icon name="logo-instagram" style="font-size:1.5rem;"></ion-icon>
+        FOLLOW @ARCHITECTPAINTER
+    </a>
+</div>
+</ul>
         </div>
     </header>
 
