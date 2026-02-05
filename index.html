@@ -10,63 +10,103 @@
 
     <style>
         :root {
-            --rose-light: #fff1f2; --rose-mid: #ffe4e6; --accent-pink: #f43f5e; --white: #ffffff; --text-dark: #1a1a1a;
-            --glass: rgba(255, 255, 255, 0.45);
+            /* NEW COLOR PALETTE: ELECTRIC POP */
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            --neon-pink: #ff0f5b; /* Brighter, electric pink */
+            --neon-glow: rgba(255, 15, 91, 0.3);
+            --deep-black: #0a0a0a;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.7);
+            
+            /* DEEP SHADOWS FOR THE "POP" EFFECT */
+            --shadow-card: 0 20px 40px -10px rgba(0,0,0,0.15);
+            --shadow-hover: 0 30px 60px -12px var(--neon-glow);
         }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Outfit', sans-serif; color: var(--text-dark); overflow-x: hidden; text-transform: uppercase; }
+        body { font-family: 'Outfit', sans-serif; color: var(--deep-black); overflow-x: hidden; text-transform: uppercase; background: var(--bg-gradient); min-height: 100vh; }
 
-        .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: linear-gradient(45deg, var(--white), var(--rose-light), var(--rose-mid), var(--white)); background-size: 400% 400%; animation: roseFlow 15s ease infinite; }
-        @keyframes roseFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        /* ANIMATED BACKGROUND (Subtle but futuristic) */
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: radial-gradient(circle at 50% 50%, rgba(255, 15, 91, 0.03), transparent 60%); }
 
-        .menu-toggle { position: fixed; top: 30px; left: 30px; background: var(--white); border: 1px solid rgba(0,0,0,0.05); padding: 15px; cursor: pointer; z-index: 10000; border-radius: 4px; }
-        .line { width: 22px; height: 1.5px; background: var(--text-dark); margin: 6px 0; }
+        /* MENU UI */
+        .menu-toggle { position: fixed; top: 30px; left: 30px; background: var(--white); border: 1px solid rgba(0,0,0,0.05); padding: 15px; cursor: pointer; z-index: 10000; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .line { width: 22px; height: 2px; background: var(--deep-black); margin: 6px 0; }
 
         .sidebar { 
             width: 380px; height: 100vh; position: fixed; top: 0; left: -390px; 
-            background: rgba(255, 255, 255, 0.85); 
+            background: rgba(255, 255, 255, 0.9); 
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-right: 1px solid rgba(0, 0, 0, 0.1); 
+            border-right: 1px solid rgba(0, 0, 0, 0.05); 
             transition: 0.6s cubic-bezier(0.8, 0, 0.2, 1); z-index: 9000; 
+            box-shadow: 10px 0 40px rgba(0,0,0,0.1);
         }
         .sidebar.active { transform: translateX(390px); }
         .sidebar-inner { display: flex; flex-direction: column; height: 100%; padding: 60px 50px; }
         
         .logo-area { display: flex; align-items: center; gap: 15px; margin-bottom: 60px; margin-top: 40px;}
-        .logo-symbol { font-size: 1.8rem; background: var(--white); width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .logo-symbol { font-size: 1.8rem; background: var(--white); width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 10px 20px var(--neon-glow); color: var(--neon-pink); }
 
         .nav-menu { list-style: none; }
         .nav-menu li { margin-bottom: 40px; }
-        .nav-menu a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; letter-spacing: 5px; opacity: 0.6; transition: 0.4s; cursor: pointer; }
-        .nav-menu a:hover { opacity: 1; color: var(--accent-pink); }
+        .nav-menu a { text-decoration: none; color: var(--deep-black); font-size: 0.9rem; letter-spacing: 5px; opacity: 0.6; transition: 0.4s; cursor: pointer; }
+        .nav-menu a:hover { opacity: 1; color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-glow); }
 
+        /* HERO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .hero-glass { background: var(--glass); padding: 70px 90px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(15px); text-align: center; }
-        h1 { font-family: 'Playfair Display'; font-size: 4rem; }
-        .accent { color: var(--accent-pink); font-style: italic; }
+        .hero-glass { 
+            background: var(--glass); padding: 70px 90px; border-radius: 40px; 
+            border: 1px solid rgba(255,255,255,0.8); backdrop-filter: blur(15px); text-align: center; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1); /* Floating Effect */
+        }
+        h1 { font-family: 'Playfair Display'; font-size: 4rem; color: var(--deep-black); }
+        .accent { color: var(--neon-pink); font-style: italic; text-shadow: 0 0 20px var(--neon-glow); }
 
         .about-section { padding: 100px 10% 50px; display: flex; justify-content: center; }
-        .about-glass { background: rgba(255,255,255,0.3); padding: 60px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.5); backdrop-filter: blur(10px); max-width: 900px; text-align: center; }
+        .about-glass { 
+            background: rgba(255,255,255,0.6); padding: 60px; border-radius: 30px; 
+            border: 1px solid rgba(255,255,255,0.5); backdrop-filter: blur(10px); max-width: 900px; text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
+        }
         .about-glass h2 { font-family: 'Playfair Display'; font-size: 2.2rem; margin-bottom: 25px; letter-spacing: 4px; }
-        .about-glass p { font-size: 1.1rem; line-height: 1.8; letter-spacing: 1px; color: #444; text-transform: none; }
+        .about-glass p { font-size: 1.1rem; line-height: 1.8; letter-spacing: 1px; color: #333; text-transform: none; }
 
-        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 50px 10% 100px; }
-        .art-card { background: var(--white); padding: 20px; border-radius: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; }
-        .art-card:hover { transform: translateY(-10px); }
-        .image-container { position: relative; width: 100%; height: 400px; margin-bottom: 20px; overflow: hidden; border-radius: 15px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; }
-        .image-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        /* ART GRID - THE POP IS HERE */
+        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 50px; padding: 50px 10% 100px; }
+        .art-card { 
+            background: var(--white); padding: 25px; border-radius: 25px; text-align: center; 
+            box-shadow: var(--shadow-card); /* Deep Shadow */
+            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            cursor: pointer; border: 1px solid transparent;
+        }
+        .art-card:hover { 
+            transform: translateY(-15px) scale(1.02); /* Lifts up higher */
+            box-shadow: var(--shadow-hover); /* Glows Pink */
+            border-color: rgba(255, 15, 91, 0.1);
+        }
         
-        .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; width: 100%; transition: 0.3s; margin-top: 10px;}
-        .cta-primary:hover { background: var(--accent-pink); }
+        .image-container { position: relative; width: 100%; height: 400px; margin-bottom: 25px; overflow: hidden; border-radius: 15px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; }
+        .image-container img { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); transition: 0.4s;}
+        .art-card:hover .image-container img { transform: scale(1.05); }
 
-        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); overflow-y: auto; padding: 40px 20px; }
-        .modal-content { margin: auto; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 50px; max-width: 1100px; padding-top: 60px; }
-        .modal-img { max-width: 500px; width: 100%; border-radius: 10px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .cta-primary { 
+            padding: 18px 45px; background: var(--deep-black); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; width: 100%; transition: 0.3s; margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .cta-primary:hover { background: var(--neon-pink); box-shadow: 0 10px 25px var(--neon-glow); transform: translateY(-3px); }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(25px); overflow-y: auto; padding: 40px 20px; }
+        .modal-content { margin: auto; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 50px; max-width: 1100px; padding-top: 60px; animation: fadeInUp 0.5s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .modal-img { max-width: 500px; width: 100%; border-radius: 15px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); }
         .modal-details { max-width: 400px; text-align: left; }
         .detail-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .detail-label { font-size: 0.7rem; color: var(--accent-pink); letter-spacing: 2px; }
+        .detail-label { font-size: 0.7rem; color: var(--neon-pink); letter-spacing: 2px; font-weight: 600; }
         .detail-value { font-size: 1.1rem; font-weight: 600; color: #111; }
-        .close-modal { position: fixed; top: 30px; right: 40px; font-size: 40px; cursor: pointer; color: var(--text-dark); z-index: 20001; }
+        .close-modal { position: fixed; top: 30px; right: 40px; font-size: 40px; cursor: pointer; color: var(--deep-black); z-index: 20001; transition: 0.3s; }
+        .close-modal:hover { color: var(--neon-pink); transform: rotate(90deg); }
 
         @media (max-width: 800px) { .modal-content { flex-direction: column; text-align: center; } .modal-details { text-align: center; } }
     </style>
@@ -74,119 +114,4 @@
 <body>
 
     <div class="bg-animation"></div>
-    <button class="menu-toggle" onclick="toggleSidebar()"><div class="line"></div><div class="line"></div></button>
-
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-inner">
-            <div class="logo-area">
-                <div class="logo-symbol"><ion-icon name="brush-outline" style="color:var(--accent-pink)"></ion-icon></div>
-                <div class="logo-text"><h2>EMAN'S</h2></div>
-            </div>
-            <ul class="nav-menu">
-                <li><a onclick="toggleSidebar()">HOME</a></li>
-                <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); toggleSidebar()">ABOUT</a></li>
-                <li><a onclick="scrollToGallery(); toggleSidebar()">COLLECTION</a></li>
-                <li><a onclick="directCheckout(); toggleSidebar()">MY CART [<span id="cart-count">0</span>]</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-glass">
-            <h1>EMAN'S <span class="accent">CANAVA FLOWERS</span></h1>
-            <button class="cta-primary" style="width:auto; margin-top:30px;" onclick="scrollToGallery()">EXPLORE</button>
-        </div>
-    </header>
-
-    <section class="about-section" id="about">
-        <div class="about-glass">
-            <h2>ABOUT THE ARTIST</h2>
-            <p>For Eman, the flower is the ultimate architectural masterpiece. Moving away from the gray lines of buildings, this gallery is dedicated exclusively to the vibrant, organic geometry of flowers. Every piece is an original acrylic study of color and light.</p>
-        </div>
-    </section>
-
-    <main id="gallery" class="art-grid"></main>
-
-    <div id="artModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <img class="modal-img" id="modalImg">
-            <div class="modal-details">
-                <h2 id="modalTitle" style="font-family:'Playfair Display'; font-size: 2.5rem; margin-bottom:30px;"></h2>
-                <div class="detail-item"><p class="detail-label">MATERIAL</p><p class="detail-value">ACRYLIC ON CANVAS</p></div>
-                <div class="detail-item"><p class="detail-label">DIMENSIONS</p><p class="detail-value" id="modalSize"></p></div>
-                <div class="detail-item"><p class="detail-label">AUTHENTICITY</p><p class="detail-value">ORIGINAL HAND-PAINTED PIECE</p></div>
-                <button class="cta-primary" id="modalBtn" style="margin-top:20px;">ADD TO MY CART</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const WHATSAPP = "201095195417";
-        let cart = [];
-
-        const paintings = [
-            { id: 1, title: "PAINTING 01", size: "100X70 CM", photos: ["p1.jpg"] },
-            { id: 2, title: "PAINTING 02", size: "60X60 CM", photos: ["p2.jpg"] },
-            { id: 3, title: "PAINTING 03", size: "30X30 CM", photos: ["p3.jpg"] },
-            { id: 4, title: "PAINTING 04", size: "30X30 CM", photos: ["p4.jpg"] },
-            { id: 5, title: "PAINTING 05", size: "30X30 CM", photos: ["p5.jpg"] },
-            { id: 6, title: "PAINTING 06", size: "30X30 CM", photos: ["p6.jpg"] },
-            { id: 7, title: "PAINTING 07", size: "30X30 CM", photos: ["p7.jpg"] },
-            { id: 8, title: "PAINTING 08", size: "40X70 CM", photos: ["p8.jpg"] },
-            { id: 9, title: "PAINTING 09", size: "40X70 CM", photos: ["p9.jpg"] },
-            { id: 10, title: "PAINTING 10", size: "40X70 CM", photos: ["p10.jpg"] }
-        ];
-
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-        function scrollToGallery() { document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' }); }
-        
-        const grid = document.getElementById('gallery');
-        paintings.forEach(p => {
-            grid.innerHTML += `
-                <div class="art-card" onclick="openModal(${p.id})">
-                    <div class="image-container"><img src="${p.photos[0]}"></div>
-                    <h3>${p.title}</h3>
-                    <p style="font-size: 0.7rem; color: #888; margin: 5px 0 15px; letter-spacing: 2px;">${p.size}</p>
-                    <button class="cta-primary" id="btn-${p.id}" onclick="event.stopPropagation(); addToCart(${p.id}, '${p.title}')">ADD TO MY CART</button>
-                </div>`;
-        });
-
-        function openModal(id) {
-            const p = paintings.find(item => item.id === id);
-            document.getElementById('modalImg').src = p.photos[0];
-            document.getElementById('modalTitle').innerText = p.title;
-            document.getElementById('modalSize').innerText = p.size;
-            document.getElementById('artModal').style.display = "block";
-            document.body.style.overflow = "hidden";
-            syncModalBtn(p.title);
-            document.getElementById('modalBtn').onclick = () => { addToCart(p.id, p.title); syncModalBtn(p.title); };
-        }
-
-        function closeModal() { document.getElementById('artModal').style.display = "none"; document.body.style.overflow = "auto"; }
-
-        function syncModalBtn(title) {
-            const modalBtn = document.getElementById('modalBtn');
-            modalBtn.innerText = cart.includes(title) ? "✓ IN YOUR CART" : "ADD TO MY CART";
-            modalBtn.style.background = cart.includes(title) ? "#f43f5e" : "#1a1a1a";
-        }
-
-        function addToCart(id, title) {
-            const btn = document.getElementById(`btn-${id}`);
-            if (!cart.includes(title)) { cart.push(title); if(btn){btn.innerText = "✓ IN CART"; btn.style.background = "#f43f5e";} }
-            else { cart = cart.filter(t => t !== title); if(btn){btn.innerText = "ADD TO MY CART"; btn.style.background = "#1a1a1a";} }
-            document.getElementById('cart-count').innerText = cart.length;
-            syncModalBtn(title);
-        }
-
-        function directCheckout() {
-            if (cart.length === 0) { alert("Your cart is empty."); return; }
-            // NEW WHATSAPP LOGIC: Ask for price and list specific painting numbers
-            const message = `Hello! I am asking for the price of these specific pieces:\n${cart.join("\n")}`;
-            window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        window.onclick = function(event) { if (event.target == document.getElementById('artModal')) { closeModal(); } }
-    </script>
-</body>
-</html>
+    <button class="menu-toggle" onclick="toggleSidebar()"><div
