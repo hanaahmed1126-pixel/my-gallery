@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMAN'S CANAVA FLOWERS</title>
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rose-light: #fff1f2; --rose-mid: #ffe4e6; --rose-deep: #fda4af;
+            --accent-pink: #f43f5e; --white: #ffffff; --text-dark: #1a1a1a;
+            --glass: rgba(255, 255, 255, 0.45);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; color: var(--text-dark); overflow-x: hidden; text-transform: uppercase; }
+
+        /* ANIMATED BACKGROUND */
+        .bg-animation {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            background: linear-gradient(45deg, var(--white), var(--rose-light), var(--rose-mid), var(--white));
+            background-size: 400% 400%; animation: roseFlow 15s ease infinite;
+        }
+        @keyframes roseFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* SIDEBAR (CLEAN - NO SIGN IN) */
+        .menu-toggle { position: fixed; top: 30px; left: 30px; background: var(--white); border: 1px solid rgba(0,0,0,0.05); padding: 15px; cursor: pointer; z-index: 2100; border-radius: 4px; }
+        .line { width: 22px; height: 1.5px; background: var(--text-dark); margin: 6px 0; }
+
+        .sidebar { width: 380px; height: 100vh; position: fixed; top: 0; left: -390px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(40px); border-right: 1px solid rgba(255, 255, 255, 0.5); transition: 0.8s cubic-bezier(0.8, 0, 0.2, 1); z-index: 9999; }
+        .sidebar.active { transform: translateX(390px); }
+        .sidebar-inner { display: flex; flex-direction: column; height: 100%; padding: 60px 50px; }
+        
+        .logo-area { display: flex; align-items: center; gap: 15px; margin-bottom: 80px; }
+        .logo-symbol { font-size: 1.8rem; background: var(--white); width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .logo-text h2 { margin: 0; font-size: 1.5rem; letter-spacing: 4px; }
+        .logo-text p { margin: 0; font-size: 0.65rem; color: var(--accent-pink); letter-spacing: 3px; }
+
+        .nav-menu { list-style: none; }
+        .nav-menu li { margin-bottom: 60px; }
+        .nav-menu a { text-decoration: none; color: var(--text-dark); font-size: 0.9rem; letter-spacing: 5px; opacity: 0.6; transition: 0.4s; cursor: pointer; }
+        .nav-menu a:hover { opacity: 1; color: var(--accent-pink); padding-left: 12px; }
+
+        .sidebar-bottom { margin-top: auto; }
+        .social-icons { display: flex; gap: 25px; margin-top: 35px; font-size: 1.4rem; }
+        .social-icons a { color: var(--text-dark); opacity: 0.4; }
+
+        /* HERO */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .hero-glass { background: var(--glass); padding: 70px 90px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(15px); text-align: center; }
+        h1 { font-family: 'Playfair Display'; font-size: 4rem; }
+        .accent { color: var(--accent-pink); font-style: italic; }
+
+        /* GALLERY & MULTI-ANGLE */
+        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 100px 10%; background: rgba(255, 255, 255, 0.4); }
+        .art-card { background: var(--white); padding: 20px; border-radius: 25px; transition: 0.5s; border: 1px solid transparent; text-align: center; }
+        
+        .image-container { position: relative; width: 100%; height: 400px; margin-bottom: 20px; cursor: pointer; overflow: hidden; border-radius: 15px; }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; }
+        .image-container img.active { opacity: 1; }
+        
+        .angle-hint { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.6rem; pointer-events: none; }
+
+        .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; margin-top: 15px; width: 100%; transition: 0.3s; }
+        .cta-primary:hover { background: var(--accent-pink); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation"></div>
+
+    <button class="menu-toggle" onclick="toggleSidebar()"><div class="line"></div><div class="line"></div></button>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-inner">
+            <div class="logo-area">
+                <div class="logo-symbol"><ion-icon name="brush-outline" style="color:var(--accent-pink)"></ion-icon></div>
+                <div class="logo-text"><h2>EMAN'S</h2><p>CANAVA FLOWERS</p></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a onclick="toggleSidebar()">HOME</a></li>
+                <li><a onclick="scrollToGallery(); toggleSidebar()">PAINTINGS</a></li>
+                <li><a onclick="directCheckout(); toggleSidebar()">FINISH ORDERS [<span id="cart-count">0</span>]</a></li>
+            </ul>
+            <div class="sidebar-bottom">
+                <div class="social-icons">
+                    <a href="https://instagram.com/architectpainter" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a href="https://facebook.com/architectpainter" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-glass">
+            <h1>EMAN'S <span class="accent">CANAVA FLOWERS</span></h1>
+            <p>@ARCHITECTPAINTER | BOTANICAL ART</p>
+            <button class="cta-primary" style="width:auto;" onclick="scrollToGallery()">EXPLORE COLLECTION</button>
+        </div>
+    </header>
+
+    <main id="gallery" class="art-grid"></main>
+
+    <script>
+        const WHATSAPP = "201095195417";
+        let cart = [];
+
+        // UPDATE PHOTO LINKS HERE
+        const paintings = [
+            { id: 1, title: "CANAVA STUDY 01", photos: ["p1_front.jpg", "p1_side.jpg", "p1_room.jpg"] },
+            { id: 2, title: "CANAVA STUDY 02", photos: ["p2_front.jpg", "p2_side.jpg", "p2_room.jpg"] }
+        ];
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function scrollToGallery() { document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' }); }
+
+        // GALLERY GENERATOR
+        const grid = document.getElementById('gallery');
+        paintings.forEach(p => {
+            let photoHtml = p.photos.map((src, index) => `<img src="${src}" class="${index === 0 ? 'active' : ''}" data-index="${index}">`).join('');
+            grid.innerHTML += `
+                <div class="art-card">
+                    <div class="image-container" onclick="nextAngle(this)">
+                        ${photoHtml}
+                        <div class="angle-hint">CLICK TO FLIP ANGLE</div>
+                    </div>
+                    <h3>${p.title}</h3>
+                    <button class="cta-primary" id="btn-${p.id}" onclick="addToCart(${p.id}, '${p.title}')">SELECT FOR ORDER</button>
+                </div>`;
+        });
+
+        function nextAngle(container) {
+            const images = container.querySelectorAll('img');
+            let currentIndex = [...images].findIndex(img => img.classList.contains('active'));
+            images[currentIndex].classList.remove('active');
+            let nextIndex = (currentIndex + 1) % images.length;
+            images[nextIndex].classList.add('active');
+        }
+
+        function addToCart(id, title) {
+            if (!cart.includes(title)) {
+                cart.push(title);
+                const btn = document.getElementById(`btn-${id}`);
+                btn.innerText = "✓ SELECTED";
+                btn.style.background = "#f43f5e";
+                document.getElementById('cart-count').innerText = cart.length;
+            } else {
+                // If they click again, remove it
+                cart = cart.filter(item => item !== title);
+                const btn = document.getElementById(`btn-${id}`);
+                btn.innerText = "SELECT FOR ORDER";
+                btn.style.background = "#1a1a1a";
+                document.getElementById('cart-count').innerText = cart.length;
+            }
+        }
+
+        function directCheckout() {
+            if (cart.length === 0) {
+                alert("PLEASE SELECT AT LEAST ONE PAINTING FIRST.");
+                return;
+            }
+            const message = encodeURIComponent(`HELLO EMAN, I WOULD LIKE TO ORDER THE FOLLOWING PIECES FROM EMANS CANAVA FLOWERS:\n\n${cart.join("\n")}`);
+            window.open(`https://wa.me/${WHATSAPP}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
