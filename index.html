@@ -25,7 +25,6 @@
         }
         @keyframes roseFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* SIDEBAR */
         .menu-toggle { position: fixed; top: 30px; left: 30px; background: var(--white); border: 1px solid rgba(0,0,0,0.05); padding: 15px; cursor: pointer; z-index: 2100; border-radius: 4px; }
         .line { width: 22px; height: 1.5px; background: var(--text-dark); margin: 6px 0; }
 
@@ -47,17 +46,90 @@
         .social-link { text-decoration: none; color: var(--text-dark); opacity: 0.4; font-size: 1.5rem; transition: 0.3s; }
         .social-link:hover { opacity: 1; color: var(--accent-pink); }
 
-        /* HERO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; }
         .hero-glass { background: var(--glass); padding: 70px 90px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(15px); text-align: center; }
         h1 { font-family: 'Playfair Display'; font-size: 4rem; }
         .accent { color: var(--accent-pink); font-style: italic; }
 
-        /* AUTOMATIC SMART-SHAPE GRID */
         .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 100px 10%; background: rgba(255, 255, 255, 0.4); }
         .art-card { background: var(--white); padding: 20px; border-radius: 25px; transition: 0.5s; text-align: center; }
         
-        /* THIS BOX AUTO-ADAPTS TO ANY SHAPE */
         .image-container { 
             position: relative; width: 100%; height: 400px; 
-            margin-bottom: 20px; cursor
+            margin-bottom: 20px; cursor: pointer; overflow: hidden; 
+            border-radius: 15px; background: #fdfdfd;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .image-container img { 
+            max-width: 100%; max-height: 100%; 
+            object-fit: contain; 
+            position: absolute; opacity: 0; transition: opacity 0.5s ease; 
+        }
+        .image-container img.active { opacity: 1; }
+        
+        .angle-hint { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.6rem; pointer-events: none; }
+
+        .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; margin-top: 10px; width: 100%; transition: 0.3s; }
+        .cta-primary:hover { background: var(--accent-pink); }
+        
+        .size-info { font-size: 0.7rem; color: #888; margin-top: 5px; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation"></div>
+    <button class="menu-toggle" onclick="toggleSidebar()"><div class="line"></div><div class="line"></div></button>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-inner">
+            <div class="logo-area">
+                <div class="logo-symbol"><ion-icon name="brush-outline" style="color:var(--accent-pink)"></ion-icon></div>
+                <div class="logo-text"><h2>EMAN'S</h2><p>CANAVA FLOWERS</p></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a onclick="toggleSidebar()">HOME</a></li>
+                <li><a onclick="scrollToGallery(); toggleSidebar()">PAINTINGS</a></li>
+                <li><a onclick="directCheckout(); toggleSidebar()">INQUIRY LIST [<span id="cart-count">0</span>]</a></li>
+            </ul>
+            <div class="sidebar-bottom">
+                <a href="https://instagram.com/architectpainter" target="_blank" class="social-link">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-glass">
+            <h1>EMAN'S <span class="accent">CANAVA FLOWERS</span></h1>
+            <p>@ARCHITECTPAINTER | BOTANICAL ART</p>
+            <button class="cta-primary" style="width:auto;" onclick="scrollToGallery()">EXPLORE COLLECTION</button>
+        </div>
+    </header>
+
+    <main id="gallery" class="art-grid"></main>
+
+    <script>
+        const WHATSAPP = "201095195417";
+        let cart = [];
+
+        const paintings = [
+            { 
+                id: 1, 
+                title: "CANAVA STUDY 01", 
+                size: "60X60 CM", 
+                photos: ["1_front.jpg", "1_side.jpg", "1_room.jpg"] 
+            },
+            { 
+                id: 2, 
+                title: "CANAVA STUDY 02", 
+                size: "30X40 CM", 
+                photos: ["2_front.jpg", "2_side.jpg", "2_room.jpg"] 
+            }
+        ];
+
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+        function scrollToGallery() { document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' }); }
+
+        const grid = document.getElementById('gallery');
+        paint
