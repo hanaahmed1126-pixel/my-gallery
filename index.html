@@ -69,13 +69,11 @@
         .cta-primary:hover { background: var(--accent-pink); }
         
         .size-info { font-size: 0.7rem; color: #888; margin-top: 5px; letter-spacing: 2px; }
-        .price-info { font-size: 1.1rem; font-weight: 600; color: var(--accent-pink); margin-top: 5px; }
     </style>
 </head>
 <body>
 
     <div class="bg-animation"></div>
-
     <button class="menu-toggle" onclick="toggleSidebar()"><div class="line"></div><div class="line"></div></button>
 
     <nav class="sidebar" id="sidebar">
@@ -87,7 +85,7 @@
             <ul class="nav-menu">
                 <li><a onclick="toggleSidebar()">HOME</a></li>
                 <li><a onclick="scrollToGallery(); toggleSidebar()">PAINTINGS</a></li>
-                <li><a onclick="directCheckout(); toggleSidebar()">FINISH ORDERS [<span id="cart-count">0</span>]</a></li>
+                <li><a onclick="directCheckout(); toggleSidebar()">FINISH INQUIRY [<span id="cart-count">0</span>]</a></li>
             </ul>
         </div>
     </nav>
@@ -96,7 +94,7 @@
         <div class="hero-glass">
             <h1>EMAN'S <span class="accent">CANAVA FLOWERS</span></h1>
             <p>@ARCHITECTPAINTER | BOTANICAL ART</p>
-            <button class="cta-primary" style="width:auto;" onclick="scrollToGallery()">EXPLORE COLLECTION</button>
+            <button class="cta-primary" style="width:auto;" onclick="scrollToGallery()">VIEW PIECES</button>
         </div>
     </header>
 
@@ -106,24 +104,21 @@
         const WHATSAPP = "201095195417";
         let cart = [];
 
-        // --- EDIT YOUR PAINTINGS BELOW THIS LINE ---
+        // JUST UPDATE THE NAMES AND SIZES HERE
         const paintings = [
             { 
                 id: 1, 
-                title: "PAINTING ONE NAME", 
-                size: "60x60 CM", 
-                price: "EGP 000",
+                title: "PAINTING NAME", 
+                size: "60X60 CM", 
                 photos: ["1_scanned.jpg", "1_texture.jpg", "1_studio.jpg"] 
             },
             { 
                 id: 2, 
-                title: "PAINTING TWO NAME", 
-                size: "30x40 CM", 
-                price: "EGP 000",
+                title: "PAINTING NAME", 
+                size: "60X60 CM", 
                 photos: ["2_scanned.jpg", "2_texture.jpg", "2_studio.jpg"] 
             }
         ];
-        // --- EDIT YOUR PAINTINGS ABOVE THIS LINE ---
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
         function scrollToGallery() { document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' }); }
@@ -135,12 +130,11 @@
                 <div class="art-card">
                     <div class="image-container" onclick="nextAngle(this)">
                         ${photoHtml}
-                        <div class="angle-hint">FLIP VIEW</div>
+                        <div class="angle-hint">TAP TO FLIP</div>
                     </div>
                     <h3>${p.title}</h3>
                     <p class="size-info">${p.size}</p>
-                    <p class="price-info">${p.price}</p>
-                    <button class="cta-primary" id="btn-${p.id}" onclick="addToCart(${p.id}, '${p.title}')">SELECT FOR ORDER</button>
+                    <button class="cta-primary" id="btn-${p.id}" onclick="addToCart(${p.id}, '${p.title}')">SELECT FOR INQUIRY</button>
                 </div>`;
         });
 
@@ -161,15 +155,15 @@
             } else {
                 cart = cart.filter(item => item !== title);
                 const btn = document.getElementById(`btn-${id}`);
-                btn.innerText = "SELECT FOR ORDER";
+                btn.innerText = "SELECT FOR INQUIRY";
                 btn.style.background = "#1a1a1a";
             }
             document.getElementById('cart-count').innerText = cart.length;
         }
 
         function directCheckout() {
-            if (cart.length === 0) { alert("PLEASE SELECT AT LEAST ONE PAINTING FIRST."); return; }
-            const message = encodeURIComponent(`HELLO EMAN, I WOULD LIKE TO ORDER THE FOLLOWING PIECES:\n\n${cart.join("\n")}`);
+            if (cart.length === 0) { alert("PLEASE SELECT A PAINTING FIRST."); return; }
+            const message = encodeURIComponent(`HELLO EMAN, I AM INQUIRING ABOUT THESE PIECES:\n\n${cart.join("\n")}`);
             window.open(`https://wa.me/${WHATSAPP}?text=${message}`, '_blank');
         }
     </script>
