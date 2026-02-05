@@ -79,7 +79,7 @@
                 <li><a onclick="toggleSidebar()">HOME</a></li>
                 <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); toggleSidebar()">ABOUT</a></li>
                 <li><a onclick="scrollToGallery(); toggleSidebar()">COLLECTION</a></li>
-                <li><a onclick="directCheckout(); toggleSidebar()">INQUIRY [<span id="cart-count">0</span>]</a></li>
+                <li><a onclick="directCheckout(); toggleSidebar()">My cart [<span id="cart-count">0</span>]</a></li>
             </ul>
             <div class="sidebar-bottom">
                 <a href="https://instagram.com/architectpainter" target="_blank" class="social-link">
@@ -142,11 +142,11 @@
             const btn = document.getElementById(`btn-${id}`);
             if (!cart.includes(title)) { 
                 cart.push(title); 
-                btn.innerText = "✓ SELECTED"; 
+                btn.innerText = "✓ added to cart"; 
                 btn.style.background = "#f43f5e"; 
             } else { 
                 cart = cart.filter(t => t !== title); 
-                btn.innerText = "SELECT PIECE"; 
+                btn.innerText = "add to cart"; 
                 btn.style.background = "#1a1a1a"; 
             }
             document.getElementById('cart-count').innerText = cart.length;
