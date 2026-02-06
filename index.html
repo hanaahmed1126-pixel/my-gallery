@@ -16,11 +16,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Outfit', sans-serif; color: var(--text-dark); overflow-x: hidden; text-transform: uppercase; }
 
-        /* BG ANIMATION */
         .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background: linear-gradient(45deg, var(--white), var(--rose-light), var(--rose-mid), var(--white)); background-size: 400% 400%; animation: roseFlow 15s ease infinite; }
         @keyframes roseFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* MENU UI */
         .menu-toggle { position: fixed; top: 30px; left: 30px; background: var(--white); border: 1px solid rgba(0,0,0,0.05); padding: 15px; cursor: pointer; z-index: 10000; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
         .line { width: 22px; height: 1.5px; background: var(--text-dark); margin: 6px 0; }
 
@@ -38,7 +36,6 @@
         .nav-menu button { background: none; border: none; font-family: inherit; color: var(--text-dark); font-size: 0.9rem; letter-spacing: 5px; opacity: 0.6; transition: 0.4s; cursor: pointer; text-transform: uppercase; }
         .nav-menu button:hover { opacity: 1; color: var(--accent-pink); }
 
-        /* HERO & ABOUT */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; }
         .hero-glass { background: var(--glass); padding: 70px 90px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(15px); text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
         h1 { font-family: 'Playfair Display'; font-size: 4.5rem; letter-spacing: -1px; }
@@ -48,13 +45,8 @@
         .about-glass { background: rgba(255,255,255,0.3); padding: 60px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.5); backdrop-filter: blur(10px); max-width: 900px; text-align: center; }
         .one-of-a-kind { color: var(--accent-pink); font-weight: 600; display: block; margin-top: 15px; letter-spacing: 2px; }
 
-        /* ART GRID */
         .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 50px; padding: 50px 10% 100px; }
-        .art-card { 
-            background: var(--white); padding: 25px; border-radius: 25px; text-align: center; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            cursor: pointer; border: none;
-        }
+        .art-card { background: var(--white); padding: 25px; border-radius: 25px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; border: none; }
         .art-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
         
         .image-container { position: relative; width: 100%; height: 420px; margin-bottom: 20px; overflow: hidden; border-radius: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
@@ -66,7 +58,6 @@
         .cta-primary { padding: 18px 45px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; width: 100%; transition: 0.3s; margin-top: 10px; text-transform: uppercase;}
         .cta-primary:hover { background: var(--accent-pink); transform: scale(1.02); }
 
-        /* MODAL */
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.85); backdrop-filter: blur(25px); overflow-y: auto; padding: 40px 20px; }
         .modal-content { margin: auto; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 60px; max-width: 1200px; padding-top: 60px; }
         .modal-img { max-width: 550px; width: 100%; border-radius: 10px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); }
@@ -76,7 +67,6 @@
         .detail-value { font-size: 1.1rem; font-weight: 600; color: #111; }
         .detail-desc { font-size: 1rem; color: #555; text-transform: none; line-height: 1.6; font-style: italic; }
         .close-modal { position: fixed; top: 30px; right: 40px; font-size: 45px; background: none; border: none; cursor: pointer; color: var(--text-dark); z-index: 20001; opacity: 0.5; transition: 0.3s; }
-        .close-modal:hover { opacity: 1; }
 
         @media (max-width: 800px) { .modal-content { flex-direction: column; text-align: center; } .modal-details { text-align: center; } }
     </style>
@@ -121,22 +111,9 @@
             <img class="modal-img" id="modalImg" alt="Selected painting detail">
             <div class="modal-details">
                 <h2 id="modalTitle" style="font-family:'Playfair Display'; font-size: 3rem; margin-bottom:10px;"></h2>
-                
-                <div class="detail-item">
-                    <p class="detail-label">STORY</p>
-                    <p class="detail-desc" id="modalDesc"></p>
-                </div>
-
-                <div class="detail-item">
-                    <p class="detail-label">MATERIAL</p>
-                    <p class="detail-value">ACRYLIC</p>
-                </div>
-
-                <div class="detail-item">
-                    <p class="detail-label">DIMENSIONS</p>
-                    <p class="detail-value" id="modalSize"></p>
-                </div>
-
+                <div class="detail-item"><p class="detail-label">STORY</p><p class="detail-desc" id="modalDesc"></p></div>
+                <div class="detail-item"><p class="detail-label">MATERIAL</p><p class="detail-value">ACRYLIC</p></div>
+                <div class="detail-item"><p class="detail-label">DIMENSIONS</p><p class="detail-value" id="modalSize"></p></div>
                 <button class="cta-primary" id="modalBtn">ADD TO MY CART</button>
             </div>
         </div>
@@ -156,7 +133,10 @@
             { id: 7, title: "PAINTING 07", size: "30X30 CM", desc: "Exploring the contrast between vibrant energy and organic stillness.", photos: ["p7.jpg"] },
             { id: 8, title: "PAINTING 08", size: "40X70 CM", desc: "Vertical floral composition designed to bring life to narrow spaces.", photos: ["p8.jpg"] },
             { id: 9, title: "PAINTING 09", size: "40X70 CM", desc: "A symphony of light reflecting off dewy morning leaves.", photos: ["p9.jpg"] },
-            { id: 10, title: "PAINTING 10", size: "40X70 CM", desc: "Captured at dusk, where shadows lengthen across the garden floor.", photos: ["p10.jpg"] }
+            { id: 10, title: "PAINTING 10", size: "40X70 CM", desc: "Captured at dusk, where shadows lengthen across the garden floor.", photos: ["p10.jpg"] },
+            { id: 11, title: "PAINTING 11", size: "50X35 CM", desc: "A vibrant exploration of color balance and floral rhythm.", photos: ["p11.jpg"] },
+            { id: 12, title: "PAINTING 12", size: "20X15 CM", desc: "A small-scale, intimate study of light on petals.", photos: ["p12.jpg"] },
+            { id: 13, title: "PAINTING 13", size: "20X15 CM", desc: "A delicate focus on nature's small, hidden details.", photos: ["p13.jpg"] }
         ];
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
@@ -170,21 +150,15 @@
             card.className = 'art-card';
             card.setAttribute('role', 'button');
             card.setAttribute('tabindex', '0');
-            card.setAttribute('aria-label', `View details for ${p.title}`);
             card.onclick = () => openModal(p.id);
             card.onkeydown = (e) => { if (e.key === 'Enter') openModal(p.id); };
-            
             card.innerHTML = `
                 <div class="image-container"><img src="${p.photos[0]}" alt="${p.title} - Acrylic"></div>
                 <h3>${p.title}</h3>
                 <p class="card-size">${p.size}</p>
                 <button class="cta-primary" id="btn-${p.id}">ADD TO MY CART</button>
             `;
-            
-            card.querySelector('.cta-primary').onclick = (e) => {
-                e.stopPropagation();
-                addToCart(p.id, p.title);
-            };
+            card.querySelector('.cta-primary').onclick = (e) => { e.stopPropagation(); addToCart(p.id, p.title); };
             fragment.appendChild(card);
         });
         grid.appendChild(fragment);
