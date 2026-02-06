@@ -52,6 +52,10 @@
         .image-container { position: relative; width: 100%; height: 420px; margin-bottom: 20px; overflow: hidden; border-radius: 12px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
         .image-container img { max-width: 95%; max-height: 95%; object-fit: contain; }
         
+        /* THE CIRCLE MAGIC */
+        .is-circle { border-radius: 50% !important; background: transparent !important; }
+        .is-circle img { border-radius: 50%; }
+
         .art-card h3 { font-family: 'Playfair Display'; font-size: 1.6rem; margin-bottom: 8px; }
         .card-size { font-size: 0.75rem; color: #888; letter-spacing: 2px; margin-bottom: 20px; }
         
@@ -61,6 +65,7 @@
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.85); backdrop-filter: blur(25px); overflow-y: auto; padding: 40px 20px; }
         .modal-content { margin: auto; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 60px; max-width: 1200px; padding-top: 60px; }
         .modal-img { max-width: 550px; width: 100%; border-radius: 10px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); }
+        .modal-img.circle-view { border-radius: 50%; }
         .modal-details { max-width: 400px; text-align: left; }
         .detail-item { margin-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 12px; }
         .detail-label { font-size: 0.7rem; color: var(--accent-pink); letter-spacing: 3px; font-weight: 600; margin-bottom: 5px; }
@@ -135,7 +140,11 @@
             { id: 9, title: "PAINTING 09", size: "40X70 CM", desc: "Captured at dusk, where shadows lengthen across the garden floor.", photos: ["p10.jpg"] },
             { id: 10, title: "PAINTING 10", size: "50X35 CM", desc: "A vibrant exploration of color balance and floral rhythm.", photos: ["p11.jpg"] },
             { id: 11, title: "PAINTING 11", size: "20X15 CM", desc: "A small-scale, intimate study of light on petals.", photos: ["p12.jpg"] },
-            { id: 12, title: "PAINTING 12", size: "20X15 CM", desc: "A delicate focus on nature's small, hidden details.", photos: ["p13.jpg"] }
+            { id: 12, title: "PAINTING 12", size: "20X15 CM", desc: "A delicate focus on nature's small, hidden details.", photos: ["p13.jpg"] },
+            /* NEW CIRCLE PAINTINGS */
+            { id: 13, title: "PAINTING 13", size: "20 CM DIAMETER", desc: "A beautiful circular composition capturing nature in the round.", photos: ["p14.jpg"], shape: "circle" },
+            { id: 14, title: "PAINTING 14", size: "20 CM DIAMETER", desc: "Soft floral energy flowing within a perfect circular frame.", photos: ["p15.jpg"], shape: "circle" },
+            { id: 15, title: "PAINTING 15", size: "20 CM DIAMETER", desc: "An elegant tondo study of garden life and vibrant pigment.", photos: ["p16.jpg"], shape: "circle" }
         ];
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
@@ -151,8 +160,12 @@
             card.setAttribute('tabindex', '0');
             card.onclick = () => openModal(p.id);
             card.onkeydown = (e) => { if (e.key === 'Enter') openModal(p.id); };
+            
+            // Apply circle class if needed
+            const circleClass = p.shape === "circle" ? "is-circle" : "";
+
             card.innerHTML = `
-                <div class="image-container"><img src="${p.photos[0]}" alt="${p.title} - Acrylic"></div>
+                <div class="image-container ${circleClass}"><img src="${p.photos[0]}" alt="${p.title}"></div>
                 <h3>${p.title}</h3>
                 <p class="card-size">${p.size}</p>
                 <button class="cta-primary" id="btn-${p.id}">ADD TO MY CART</button>
@@ -164,7 +177,13 @@
 
         function openModal(id) {
             const p = paintings.find(item => item.id === id);
-            document.getElementById('modalImg').src = p.photos[0];
+            const mImg = document.getElementById('modalImg');
+            mImg.src = p.photos[0];
+            
+            // Make modal image circle if painting is circle
+            if(p.shape === "circle") { mImg.classList.add('circle-view'); } 
+            else { mImg.classList.remove('circle-view'); }
+
             document.getElementById('modalTitle').innerText = p.title;
             document.getElementById('modalSize').innerText = p.size;
             document.getElementById('modalDesc').innerText = p.desc;
