@@ -34,39 +34,33 @@
         h1 { font-family: 'Playfair Display'; font-size: 4.5rem; letter-spacing: -1px; }
         .accent { color: var(--accent-pink); font-style: italic; }
 
-        /* UNIFORM GRID */
-        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; padding: 50px 8% 100px; }
-        
-        /* SQUARE CARDS */
-        .art-card { background: var(--white); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; cursor: pointer; }
+        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 50px 8% 100px; }
+        .art-card { background: var(--white); padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; cursor: pointer; }
         .art-card:hover { transform: translateY(-10px); }
 
-        /* PERFECT SQUARE IMAGE BOX */
         .image-container { 
             position: relative; 
             width: 100%; 
-            aspect-ratio: 1 / 1; /* This forces a perfect square */
+            aspect-ratio: 1 / 1; 
             margin-bottom: 20px; 
             overflow: hidden; 
-            border-radius: 8px; 
+            border-radius: 12px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            background: #fff; 
+            background: #fff; /* Keep the box white */
         }
         .image-container img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; /* This makes sure the image fills the square */
+            width: 90%; /* Slightly smaller so the painting doesn't touch the edges */
+            height: 90%; 
+            object-fit: contain; /* Shows the WHOLE painting, no cutting */
         }
 
         .art-card h3 { font-family: 'Playfair Display'; font-size: 1.5rem; margin-bottom: 5px; }
         .card-size { font-size: 0.7rem; color: #888; letter-spacing: 2px; margin-bottom: 15px; }
-        
         .cta-primary { padding: 16px 30px; background: var(--text-dark); color: var(--white); border: none; border-radius: 100px; cursor: pointer; font-weight: 600; letter-spacing: 2px; width: 100%; transition: 0.3s; }
         .cta-primary:hover { background: var(--accent-pink); }
 
-        /* Modal */
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); overflow-y: auto; padding: 40px; }
         .modal-content { margin: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 50px; max-width: 1100px; padding-top: 50px; }
         .modal-img { max-width: 600px; width: 100%; border-radius: 10px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
@@ -128,9 +122,9 @@
             { id: 10, title: "PAINTING 10", size: "50X35 CM", desc: "A vibrant exploration of color balance and floral rhythm.", photos: ["p11.jpg"] },
             { id: 11, title: "PAINTING 11", size: "20X15 CM", desc: "A small-scale, intimate study of light on petals.", photos: ["p12.jpg"] },
             { id: 12, title: "PAINTING 12", size: "20X15 CM", desc: "A delicate focus on nature's small, hidden details.", photos: ["p13.jpg"] },
-            { id: 13, title: "PAINTING 13", size: "20 CM DIAMETER", desc: "A beautiful circular study of blooming energy.", photos: ["p.png"] },
-            { id: 14, title: "PAINTING 14", size: "20 CM DIAMETER", desc: "Soft floral movement within a perfect round frame.", photos: ["pp.png"] },
-            { id: 15, title: "PAINTING 15", size: "20 CM DIAMETER", desc: "An elegant circular piece focused on organic harmony.", photos: ["ppp.png"] }
+            { id: 13, title: "PAINTING 13", size: "20 CM DIAMETER", desc: "A beautiful study of blooming energy.", photos: ["p.png"] },
+            { id: 14, title: "PAINTING 14", size: "20 CM DIAMETER", desc: "Soft floral movement within a perfect frame.", photos: ["pp.png"] },
+            { id: 15, title: "PAINTING 15", size: "20 CM DIAMETER", desc: "An elegant piece focused on organic harmony.", photos: ["ppp.png"] }
         ];
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
