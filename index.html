@@ -190,7 +190,7 @@
             else { cart = cart.filter(t => t !== title); }
             document.getElementById('cart-count').innerText = cart.length;
             const btn = document.getElementById(`btn-${id}`);
-            if(btn) btn.innerText = cart.includes(title) ? "✓ IN CART" : "ADD TO CART";
+            if(btn) btn.innerText = cart.includes(title) ? "✓ ADDED TO CART" : "ADD TO CART";
         }
 
         function directCheckout() {
