@@ -34,10 +34,11 @@
         h1 { font-family: 'Playfair Display'; font-size: 4.5rem; letter-spacing: -1px; }
         .accent { color: var(--accent-pink); font-style: italic; }
 
-        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 50px 8% 100px; }
+        .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; padding: 50px 8% 100px; }
         .art-card { background: var(--white); padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; cursor: pointer; }
         .art-card:hover { transform: translateY(-10px); }
 
+        /* THE SQUARE BOX */
         .image-container { 
             position: relative; 
             width: 100%; 
@@ -48,12 +49,14 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            background: #fff; /* Keep the box white */
+            background: #fff; 
         }
+        
+        /* THE BIG PAINTING FIX */
         .image-container img { 
-            width: 90%; /* Slightly smaller so the painting doesn't touch the edges */
-            height: 90%; 
-            object-fit: contain; /* Shows the WHOLE painting, no cutting */
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* Forces the art to fill the whole square boldly */
         }
 
         .art-card h3 { font-family: 'Playfair Display'; font-size: 1.5rem; margin-bottom: 5px; }
@@ -122,9 +125,9 @@
             { id: 10, title: "PAINTING 10", size: "50X35 CM", desc: "A vibrant exploration of color balance and floral rhythm.", photos: ["p11.jpg"] },
             { id: 11, title: "PAINTING 11", size: "20X15 CM", desc: "A small-scale, intimate study of light on petals.", photos: ["p12.jpg"] },
             { id: 12, title: "PAINTING 12", size: "20X15 CM", desc: "A delicate focus on nature's small, hidden details.", photos: ["p13.jpg"] },
-            { id: 13, title: "PAINTING 13", size: "20 CM DIAMETER", desc: "A beautiful study of blooming energy.", photos: ["p.png"] },
-            { id: 14, title: "PAINTING 14", size: "20 CM DIAMETER", desc: "Soft floral movement within a perfect frame.", photos: ["pp.png"] },
-            { id: 15, title: "PAINTING 15", size: "20 CM DIAMETER", desc: "An elegant piece focused on organic harmony.", photos: ["ppp.png"] }
+            { id: 13, title: "PAINTING 13", size: "20 CM DIAMETER", desc: "Original floral study.", photos: ["p.png"] },
+            { id: 14, title: "PAINTING 14", size: "20 CM DIAMETER", desc: "Original floral study.", photos: ["pp.png"] },
+            { id: 15, title: "PAINTING 15", size: "20 CM DIAMETER", desc: "Original floral study.", photos: ["ppp.png"] }
         ];
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
